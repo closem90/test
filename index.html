@@ -22,7 +22,7 @@
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
         "reader",
-        { fps: 10, qrbox: {width: 500, height: 250} },
+        { fps: 10, qrbox: {width: 500, height: 500}, formatsToSupport: [ Html5QrcodeSupportedFormats.EAN_13 ] },
         /* verbose= */ false);
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
     </script>
