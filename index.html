@@ -1,40 +1,31 @@
 <html>
-    <head></head>
-    <body>
 
+<head></head>
 
+<body>
+    <div id="reader" width="600px"></div>
 
-        <script>
-             var elem = document.createElement("p")
-            document.body.appendChild(elem);
-
-            try{
-            const barcodeDetector = new BarcodeDetector({
-            // (Optional) A series of barcode formats to search for.
-            // Not all formats may be supported on all platforms
-            formats: [
-                'aztec',
-                'code_128',
-                'code_39',
-                'code_93',
-                'codabar',
-                'data_matrix',
-                'ean_13',
-                'ean_8',
-                'itf',
-                'pdf417',
-                'qr_code',
-                'upc_a',
-                'upc_e'
-            ]
-            });
-
-           
-            elem.innerHTML = "True"
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script type="module">
+                // To use Html5QrcodeScanner (more info below)
+        
+        function onScanSuccess(decodedText, decodedResult) {
+        // handle the scanned code as you like, for example:
+        console.log(`Code matched = ${decodedText}`, decodedResult);
         }
-        catch{
-            elem.innerHTML = "False"
+
+        function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        console.warn(`Code scan error = ${error}`);
         }
-        </script>
-    </body>
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { fps: 10, qrbox: {width: 250, height: 250} },
+        /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+</body>
+
 </html>
